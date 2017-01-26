@@ -5,14 +5,21 @@
  */
 html {
   box-sizing: border-box;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
-/*
- * Global layout stuff
- */
+.container {
+  width: 600px;
+  max-width: 600px;
+  background-color: white;
+  margin: auto;
+  margin-top: 80px;
+  padding-bottom: auto;
+  display: table;
+}
 
 body {
   margin: 0;
