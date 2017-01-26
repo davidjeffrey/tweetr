@@ -1,7 +1,3 @@
-// Test / driver code (temporary). Eventually will get this from the server.
-
-// var $tweet = $("<article>").addClass("tweet");
-
 $(function() {
 
 function escape(str) {
@@ -10,6 +6,35 @@ function escape(str) {
   return div.innerHTML;
 }
 
+function timeSince(date) {
+
+    var seconds = Math.floor((new Date() - date) / 1000);
+
+    var interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) {
+        return interval + " years";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+        return interval + " months";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+        return interval + " days";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+        return interval + " hours";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+        return interval + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+}
+
+console.log(timeSince($.now()))
 function createTweetElement (data) {
   let result = $(`<article class="tweet">
                     <header>
@@ -19,7 +44,7 @@ function createTweetElement (data) {
                     </header>
                     <p>${escape(data.content.text)}</p>
                     <footer>
-                        ${escape(data.created_at)}
+                        ${timeSince(escape(data.created_at))}
                       <a href="#">
                         <span class="glyphicon glyphicon-asterisk"></span>
                       </a>
@@ -30,7 +55,8 @@ function createTweetElement (data) {
                         <span class="glyphicon glyphicon-heart"></span>
                       </a>
                     </footer>
-                  </article>`);
+                  </article>`
+                );
   return result;
 }
 
@@ -46,11 +72,13 @@ $(".new-tweet input").on("click", function(){
   event.preventDefault();
   if ($(".new-tweet textarea").serialize().length - 5 > 140) {
     alert("Too long! Must be less than 140 characters child!")
-  } else if ($(".new-tweet textarea").serialize().length - 5 < 1) {
+  } else if (!$(".new-tweet textarea").val()) {
     alert("Can't have an empty tweet child!")
   } else {
       $.post( "./tweets", $(".new-tweet textarea").serialize())
       .success( function() {
+        $(".new-tweet").slideToggle(500)
+        $(".new-tweet textarea").val("")
         loadTweets();
         });
     }
