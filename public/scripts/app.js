@@ -71,9 +71,37 @@ $(function() {
       url: './tweets',
       method: 'GET',
       success: function (tweets) {
-        renderTweets(tweets.reverse())}
+        renderTweets(tweets.reverse()), console.log(tweets)}
       })
   }
+
+  $("#loginClick").on("click", function(){
+   event.preventDefault();
+    $.post( "./login", $(".login").serialize())
+      .success( function() {
+
+        // $(".login").slideToggle(500)
+        // $("#username").val("")
+        // loadTweets();
+        })
+      .fail(function () {alert("wrong username")})
+  });
+
+  $("#regNewUser").on("click", function(){
+   event.preventDefault();
+
+    $.post( "./login", $(".newPeep").serialize())
+      .success( function() {
+          $(".newPeep").slideToggle(100)
+          $(".newPeep").val("")
+        })
+      .fail(function () {alert("wrong password")})
+  });
+
+  $("#newReg").on("click", function() {
+    event.preventDefault();
+    $(".newPeep").slideToggle(100)
+  });
 
   $(".new-tweet input").on("click", function(){
     event.preventDefault();

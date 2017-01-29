@@ -40,12 +40,25 @@
     <nav id="nav-bar">
       <img class="logo" src="/images/bird.png">
       <span class="nav-header">Tweeter</span>
+      <form class="login">
+        <input type="text" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+        <input id="loginClick" type="submit" value="Login">
+        <input id="newReg" type="submit" value="Register">
+      </form>
       <button>Compose&#160;&#9998;</button>
     </nav>
 
     <!-- Page-specific (main) content here -->
     <main class="container">
-
+      <br><br>
+      <form>
+        <input class="newPeep" type="text" name="newUserName" placeholder="handle">
+        <input class="newPeep" type="password" name="newPassword" placeholder="password">
+        <input class="newPeep" type="text" name="newAvatar" placeholder="avatar url">
+        <input class="newPeep" type="text" name="realName" placeholder="your name">
+        <input class="newPeep" id="regNewUser" type="submit" value="Register">
+      </form>
       <section class="new-tweet">
         <h2>Compose Tweet</h2>
         <form method="POST" action="./tweets">
